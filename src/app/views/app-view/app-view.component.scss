@@ -1,0 +1,36 @@
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; // Full height of the viewport
+  
+    // Nav bar takes the top part
+    app-nav-bar {
+      height: 60px; // Adjust the height of the navbar
+      background-color: #007bff; // Example background color
+      margin-bottom: 1.3rem;
+    }
+  
+    .content-area {
+      display: flex;
+      flex: 1; // Fill the remaining vertical space after the navbar
+      overflow: hidden;
+  
+      app-menu {
+        width: 250px; // Adjust the width of the menu
+        background-color: #f8f9fa; // Example background color for menu
+        height: 100%; // Ensure it takes full height
+        overflow-y: auto; // Allow scrolling if menu is long
+        margin-top: rem;
+      }
+  
+      router-outlet {
+    
+        // Optional: style for all direct children of router-outlet
+        > * {
+            width: 100%;
+            flex: 1; // Allow each child component to take available space
+            overflow-y: auto; // Enable scrolling for each child component
+        }
+    }
+  }
+}

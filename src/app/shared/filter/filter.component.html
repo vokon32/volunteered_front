@@ -1,0 +1,6 @@
+@for (field of fields; track field) {
+    <input type="text"
+    [name]="field"
+    (input)="changeFilter($event, field)"
+    >
+}

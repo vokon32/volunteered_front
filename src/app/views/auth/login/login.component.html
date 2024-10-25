@@ -1,0 +1,13 @@
+<div class="login-card">
+
+    <div class="card-title">
+        <h1>Авторизація</h1>
+        <span>В тебе немає аккаунту? <a routerLink="/registration">Зареєструватись</a></span>
+    </div>
+    <form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input name="email" type="email" formControlName="email" placeholder="Пошта">
+        <input type="password" formControlName="password" placeholder="Пароль">
+        <button>Submit</button>
+    </form>
+
+</div>

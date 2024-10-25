@@ -1,0 +1,12 @@
+<div class="signup-card">
+    <div class="card-title">
+        <h1>Реєстрація</h1>
+        <span>Вже маєте аккаунт? <a routerLink="/login">Авторизуватись</a></span>
+    </div>
+    <form class="form-group" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <input type="email" name="email" placeholder="Пошта" formControlName="email">
+        <input type="password" name="password" placeholder="Пароль" formControlName="password">
+        <input type="password" name="resetPassword" placeholder="Повторіть пароль" >
+        <input type="submit" value="Зареєструватись">
+    </form>
+</div>

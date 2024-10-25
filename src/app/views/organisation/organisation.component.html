@@ -1,0 +1,10 @@
+<div>Організація</div>
+<app-table [service]="service" [toolbarTemplate]="toolbar">
+
+
+
+</app-table>
+
+<ng-template #toolbar>
+    <app-filter [service]="service" [fields]="['name']"></app-filter>
+</ng-template>
