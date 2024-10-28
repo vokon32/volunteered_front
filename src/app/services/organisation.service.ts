@@ -7,7 +7,7 @@ export class OrganisationService extends ABaseTableService{
 
     constructor(httpService: OrganisationHttpService) {
         super([
-            { name: 'Назва', value: 'name' },
+            { name: 'Назва', value: 'name', canSort: true },
         ],httpService);
     }
 }

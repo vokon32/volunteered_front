@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output, TemplateRef } from '@angular/core';
 import { ABaseTableService } from '../../services/a-base-service';
 import { BehaviorSubject, first } from 'rxjs';
 import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
@@ -20,8 +20,11 @@ export class TableComponent {
   page$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   pageItems$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   fields: any;
+
   @Input() service!: ABaseTableService;
   @Input() public toolbarTemplate!: TemplateRef<any>;
+  @Input() datakey: string = 'id';
+  @Output() selectedData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -33,7 +36,6 @@ export class TableComponent {
     this.pageItems$ = this.service.pageItems$;
     this.data$ = this.service.data$;
     this.fields = this.service.fields;
-    console.log('this service fields', this.service.fields)
   }
 
   onPageChange(event: any) {
@@ -42,5 +44,19 @@ export class TableComponent {
     this.page$.next(event.first / this.pageItems$.getValue() + 1);
 
     this.service.loadByFilter()
+  }
+
+  onRowSelect(event: any) {
+    this.selectedData.emit(event.data);
+  }
+
+  OnSort(event: any) {
+    if (event.order === 1) {
+      this.service.sort = `${event.field}Asc`
+    }
+    else {
+      this.service.sort = `${event.field}Desc`
+    }
+    this.service.loadByFilter();
   }
 }

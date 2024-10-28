@@ -1,0 +1,26 @@
+<div>Номенклатура</div>
+
+<app-filter [service]="service" [fields]="['name']"></app-filter>
+
+<app-table [service]="service" [toolbarTemplate]="toolbar" (selectedData)="selectData($event)">
+
+
+
+</app-table>
+
+<ng-template #toolbar>
+    <div class="mt-3 mb-3 flex">
+        <div>
+            <button (click)="create()">Створити</button>
+
+        </div>
+        <div>
+            <button (click)="update()">Редагувати</button>
+        </div>
+
+        <div>
+            <button (click)="delete()">Видалити</button>
+        </div>
+    </div>
+
+</ng-template>

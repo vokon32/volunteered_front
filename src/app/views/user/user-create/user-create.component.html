@@ -1,0 +1,28 @@
+<form [formGroup]="profileForm">
+    <div class="form-group">
+        <label>Пошта</label>
+        <input type="text" formControlName="email" class="form-control" />
+        <label>Номер довідки</label>
+        <input type="text" formControlName="cardNumber" class="form-control" />
+        <label>Адреса</label>
+        <input type="text" formControlName="address" class="form-control" />
+        <label>ПІБ</label>
+        <input type="text" formControlName="name" class="form-control" />
+        <label>Номер телефона</label>
+        <input type="text" formControlName="phoneNumber" class="form-control" />
+        <div class="mt-2">
+            <p-dropdown formControlName="selectedFund" [options]="fundService.data$ | async" optionLabel="shortName"
+                placeholder="Оберіть фонд" />
+
+        </div>
+    </div>
+    <div class="flex">
+        <div>
+            <button class="cancel" (click)="close()">Закрити</button>
+        </div>
+        <div>
+            <button class="submit" (click)="create()">Створити</button>
+        </div>
+    </div>
+
+</form>

@@ -42,14 +42,14 @@ export class MenuComponent {
         items: [
           {
             label: 'Записи',
-            url: 'organisation',
-            command: (event) => this.onItemClick(event, 'organisation'),
+            url: 'app/appointment',
+            command: (event) => this.onItemClick(event, 'app/appointment'),
             icon: 'pi pi-fw pi-bookmark'
           },
           {
             label: 'Список користувачів',
-            url: 'settings',
-            command: (event) => this.onItemClick(event, 'settings'),
+            url: 'app/user',
+            command: (event) => this.onItemClick(event, 'app/user'),
             icon: 'pi pi-fw pi-video'
           }
         ]
@@ -61,7 +61,7 @@ export class MenuComponent {
           {
             label: 'Керування фондом',
             url: 'organisation',
-            command: (event) => this.onItemClick(event, 'organisation'),
+            command: (event) => this.onItemClick(event, 'app/fund-rule'),
             icon: 'pi pi-fw pi-bookmark'
           }]
       },
@@ -71,8 +71,20 @@ export class MenuComponent {
         items: [
           {
             label: 'Номенклатура',
-            url: 'organisation',
-            command: (event) => this.onItemClick(event, 'organisation'),
+            url: 'nomenclature',
+            command: (event) => this.onItemClick(event, 'app/nomenclature'),
+            icon: 'pi pi-fw pi-bookmark'
+          },
+          {
+            label: 'Прибуткові накладні',
+            url: 'invoice',
+            command: (event) => this.onItemClick(event, 'app/invoice'),
+            icon: 'pi pi-fw pi-bookmark'
+          },
+          {
+            label: 'Акти списання',
+            url: 'act',
+            command: (event) => this.onItemClick(event, 'app/act'),
             icon: 'pi pi-fw pi-bookmark'
           }]
       }

@@ -20,7 +20,8 @@
         background-color: #f8f9fa; // Example background color for menu
         height: 100%; // Ensure it takes full height
         overflow-y: auto; // Allow scrolling if menu is long
-        margin-top: rem;
+        margin-top: 0.2rem;
+        margin-right: 2rem;
       }
   
       router-outlet {

@@ -1,19 +1,28 @@
 <div>
     <ng-container [ngTemplateOutlet]="toolbarTemplate"></ng-container>
 </div>
-<p-table [value]="service.data$ | async" [paginator]="true" [tableStyle]="{ 'min-width': '50rem' }"
+<p-table class="custom-table" [value]="service.data$ | async" [paginator]="true" [tableStyle]="{ 'min-width': '50rem' }"
     [first]="((service.page$ | async) - 1) * (service.pageItems$ | async)" [rows]="service.pageItems$ | async"
     [totalRecords]="service.count$ | async" currentPageReportTemplate="{first} до {last} з {totalRecords} рядків"
-    [showCurrentPageReport]="true" [lazy]="true" (onPage)="onPageChange($event)" [rowsPerPageOptions]="[5, 10, 25]">
+    [showCurrentPageReport]="true" [lazy]="true" [dataKey]="datakey" (onPage)="onPageChange($event)"
+    (onRowSelect)="onRowSelect($event)" selectionMode="single" (onSort)="OnSort($event)"
+    [rowsPerPageOptions]="[5, 10, 25]">
+
     <ng-template pTemplate="header">
         <tr>
             @for (field of fields; track field) {
-            <th>{{field.name}}</th>
+            @if (field.canSort) {
+            <th [pSortableColumn]="field.value">{{field.name}} <p-sortIcon field="code"></p-sortIcon></th>
+
             }
+            @else {
+            <th> {{field.name}}</th>
+            }
+        }
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
-        <tr>
+        <tr [pSelectableRow]="data">
             <!-- {{data | json}} -->
             @for (field of fields; track field) {
 

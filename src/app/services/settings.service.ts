@@ -8,7 +8,7 @@ export class SettingsService extends ABaseTableService {
 
     constructor(httpService: SettingsHttpService) {
         super([
-            { name: 'Назва', value: 'name' },
+            { name: 'Назва', value: 'name', canSort: true },
             { name: 'Значення', value: 'value' }
         ], httpService);
     }
