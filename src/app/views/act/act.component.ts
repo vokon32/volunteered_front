@@ -4,6 +4,9 @@ import { FilterComponent } from '../../shared/filter/filter.component';
 import { TableComponent } from '../../shared/table/table.component';
 import { ActService } from '../../services/act-service';
 import { DialogService } from 'primeng/dynamicdialog';
+import { getCreateProfileForm, getEditProfileForm } from './act-form';
+import { ActCreateComponent } from './act-create/act-create.component';
+import { ActEditComponent } from './act-edit/act-edit.component';
 
 @Component({
   selector: 'app-act',
@@ -18,8 +21,8 @@ export class ActComponent {
   selectedData!: any;
 
   constructor(public service: ActService) {
-    // service.createProfileForm = getCreateProfileForm();
-    // service.editProfileForm = getEditProfileForm();
+    service.createProfileForm = getCreateProfileForm();
+    service.editProfileForm = getEditProfileForm();
   }
 
   selectData(data: any) {
@@ -27,11 +30,16 @@ export class ActComponent {
     this.service.editProfileForm.patchValue(data);
   }
 
+  create() {
+    this.service.create(ActCreateComponent, 'номенклатуру');
+  }
+
   update() {
-    this.service.update(ActComponent, this.selectedData.shortName, this.selectedData);
+    console.log(this.selectedData)
+    this.service.update(ActEditComponent, this.selectedData.number, this.selectedData);
   }
 
   delete() {
-    this.service.delete(this.selectedData.shortName, [this.selectedData.id]);
+    this.service.delete(this.selectedData.number, [this.selectedData.id]);
   }
 }

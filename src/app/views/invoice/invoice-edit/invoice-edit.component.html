@@ -1,0 +1,13 @@
+<form [formGroup]="profileForm">
+    <div class="form-group">
+        <label>Дата</label>
+        <p-calendar [autofocus]="false" formControlName="date" />
+        <label>Номер</label>
+        <input type="text" formControlName="number" class="form-control" />
+    </div>
+</form>
+<app-table [service]="nomenclatureService"></app-table>
+
+
+<div><button (click)="update()">Зберегти</button></div>
+<div><button (click)="close()">Закрити</button></div>

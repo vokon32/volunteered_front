@@ -1,0 +1,62 @@
+<p-stepper #stepper>
+    <p-stepperPanel header="Оберіть дату прибуткової накладної">
+        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+            <div class="flex flex-column h-12rem">
+                <div
+                    class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                </div>
+                <form [formGroup]="profileForm">
+                    <div class="form-group">
+                        <label>Дата</label>
+                        <p-calendar formControlName="date" />
+                        <label>Номер</label>
+                        <input type="text" formControlName="number" class="form-control" />
+                        <div class="mt-2">
+                            <p-dropdown formControlName="fundId" [options]="fundService.data$ | async" optionLabel="shortName"
+                                optionValue="id" placeholder="Оберіть фонд" />
+                    
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="flex pt-4 justify-content-end">
+                <p-button label="Далі" icon="pi pi-arrow-right" iconPos="right" (onClick)="createAppointment($event)" />
+            </div>
+        </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Обрати номенклатуру">
+        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback"
+            let-index="index">
+            <div class="flex flex-column h-12rem">
+                <div
+                    class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                    
+                    <app-table [service]="userService" (selectedData)="selectUser($event)"></app-table>
+                </div>
+            </div>
+            <div class="flex pt-4 justify-content-end">
+                <p-button label="Створити" icon="pi pi-arrow-right" iconPos="right" (onClick)="update()" />
+            </div>
+        </ng-template>
+    </p-stepperPanel>
+</p-stepper>
+
+<!-- <ng-template #footer>
+
+    <button>Додати</button>
+    <button>Закрити</button>
+</ng-template> -->
+<!-- <form [formGroup]="profileForm">
+
+    <div class="flex">
+        <div>
+            <button class="cancel" (click)="close()">Закрити</button>
+        </div>
+        <div>
+            <button class="submit" (click)="create()">Створити</button>
+        </div>
+    </div>
+
+</form> -->
+

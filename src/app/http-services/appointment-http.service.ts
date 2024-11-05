@@ -9,4 +9,9 @@ export class AppointmentHttpService extends ABaseTableHttpService {
         super('Appointment');
         
     }
+
+
+    getNextNumber(){
+      return this.httpClient.get(`${this.apiUrl}/${this.controllerName}/nextNumber`);
+    }
 }

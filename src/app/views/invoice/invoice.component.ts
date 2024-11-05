@@ -4,6 +4,9 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { InvoiceService } from '../../services/invoice-service';
 import { FilterComponent } from '../../shared/filter/filter.component';
 import { TableComponent } from '../../shared/table/table.component';
+import { InvoiceCreateComponent } from './invoice-create/invoice-create.component';
+import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
+import { getCreateProfileForm, getEditProfileForm } from './invoice-form';
 
 @Component({
   selector: 'app-invoice',
@@ -18,8 +21,8 @@ export class InvoiceComponent {
   selectedData!: any;
 
   constructor(public service: InvoiceService) {
-    // service.createProfileForm = getCreateProfileForm();
-    // service.editProfileForm = getEditProfileForm();
+    service.createProfileForm = getCreateProfileForm();
+    service.editProfileForm = getEditProfileForm();
   }
 
   selectData(data: any) {
@@ -27,11 +30,16 @@ export class InvoiceComponent {
     this.service.editProfileForm.patchValue(data);
   }
 
+  create() {
+    this.service.create(InvoiceCreateComponent, 'номенклатуру');
+  }
+
   update() {
-    this.service.update(InvoiceComponent, this.selectedData.shortName, this.selectedData);
+    console.log(this.selectedData)
+    this.service.update(InvoiceEditComponent, this.selectedData.number, this.selectedData);
   }
 
   delete() {
-    this.service.delete(this.selectedData.shortName, [this.selectedData.id]);
+    this.service.delete(this.selectedData.number, [this.selectedData.id]);
   }
 }

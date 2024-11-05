@@ -11,7 +11,7 @@
         <label>Номер телефона</label>
         <input type="text" formControlName="phoneNumber" class="form-control" />
         <div class="mt-2">
-            <p-dropdown formControlName="selectedFund" [options]="fundService.data$ | async" optionLabel="shortName"
+            <p-dropdown formControlName="fundId" [options]="fundService.data$ | async" optionLabel="shortName" optionValue="id"
                 placeholder="Оберіть фонд" />
 
         </div>

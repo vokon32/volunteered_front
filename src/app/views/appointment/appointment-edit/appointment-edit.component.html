@@ -1,0 +1,18 @@
+<form [formGroup]="profileForm">
+    <div class="form-group">
+        <label>Дата</label>
+        <p-calendar [autofocus]="false" formControlName="date" />
+        <label>Номер</label>
+        <input type="text" formControlName="number" class="form-control" />
+    </div>
+    <div class="mt-2">
+        <p-dropdown formControlName="fundId" [options]="fundService.data$ | async" optionLabel="shortName"
+            optionValue="id" placeholder="Оберіть фонд" />
+
+    </div>
+</form>
+<app-table [service]="userService"></app-table>
+
+
+<div><button (click)="update()">Зберегти</button></div>
+<div><button (click)="close()">Закрити</button></div>

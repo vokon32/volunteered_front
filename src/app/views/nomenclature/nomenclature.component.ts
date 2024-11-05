@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NomenclatureService } from '../../services/nomenclature.service';
 import { FilterComponent } from '../../shared/filter/filter.component';
 import { TableComponent } from '../../shared/table/table.component';
@@ -7,18 +7,20 @@ import { FormGroup } from '@angular/forms';
 import { getCreateProfileForm, getEditProfileForm } from './nomencalture-form';
 import { NomenclatureCreateComponent } from './nomenclature-create/nomenclature-create.component';
 import { NomenclatureEditComponent } from './nomenclature-edit/nomenclature-edit.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nomenclature',
   standalone: true,
   providers: [NomenclatureService, DialogService],
-  imports: [TableComponent, FilterComponent],
+  imports: [TableComponent, FilterComponent, CommonModule],
   templateUrl: './nomenclature.component.html',
   styleUrl: './nomenclature.component.scss'
 })
 export class NomenclatureComponent {
   profileForm!: FormGroup;
   selectedData!: any;
+  @Input() footer: any;
 
   constructor(public service: NomenclatureService) {
     service.createProfileForm = getCreateProfileForm();

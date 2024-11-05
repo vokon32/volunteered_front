@@ -12,7 +12,7 @@ import { NomenclatureEditComponent } from "../views/nomenclature/nomenclature-ed
 @Injectable()
 export abstract class ABaseTableService {
     data$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-    count$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    count$: BehaviorSubject<any> = new BehaviorSubject<any>(0);
     loading$: BehaviorSubject<boolean> = new BehaviorSubject<any>(true);
     page$: BehaviorSubject<any> = new BehaviorSubject<any>(1);
     pageItems$: BehaviorSubject<any> = new BehaviorSubject<any>(5);

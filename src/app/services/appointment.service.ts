@@ -5,11 +5,16 @@ import { ABaseTableService } from "./a-base-service";
 @Injectable()
 export class AppointmentService extends ABaseTableService{
 
-    constructor(httpService: AppointmentHttpService) {
+    constructor(private httpService: AppointmentHttpService) {
         super([
             { name: 'Дата', value: 'date', canSort: true },
             { name: 'Фонд', value: 'fundName' },
             { name: 'Користувач', value: 'userName' },
         ],httpService);
+    }
+
+
+    getNextNumber(){
+        return this.httpService.getNextNumber();
     }
 }

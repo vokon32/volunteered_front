@@ -8,7 +8,7 @@ export function getCreateProfileForm() {
         phoneNumber: new FormControl('', Validators.required),
         address: new FormControl('', Validators.required),
         name: new FormControl('', Validators.required),
-        selectedFund: new FormControl('', Validators.required)
+        fundId: new FormControl('', Validators.required)
     });
 
 }
@@ -21,7 +21,7 @@ export function getEditProfileForm() {
         phoneNumber: new FormControl('', Validators.required),
         address: new FormControl('', Validators.required),
         name: new FormControl('', Validators.required),
-        selectedFund: new FormControl('', Validators.required)
+        fundId: new FormControl('', Validators.required)
     });
 
 }

@@ -59,7 +59,7 @@ export abstract class AModalBaseService {
                 next: (res: any) => {
                     this.close();
                     this.messageService.add({
-                        severity: 'success', summary: 'Успіх', detail: `Об\'єкт успішно створено`
+                        severity: 'success', summary: 'Успіх', detail: `Об\'єкт успішно оновлено`
                     })
                 },
                 error: (err: any) => {

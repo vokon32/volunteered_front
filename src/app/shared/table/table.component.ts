@@ -24,6 +24,8 @@ export class TableComponent {
   @Input() service!: ABaseTableService;
   @Input() public toolbarTemplate!: TemplateRef<any>;
   @Input() datakey: string = 'id';
+  @Input() usecheckbox = false;
+  selectionMode!: "single" | "multiple";
   @Output() selectedData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
@@ -35,7 +37,12 @@ export class TableComponent {
     this.page$ = this.service.page$;
     this.pageItems$ = this.service.pageItems$;
     this.data$ = this.service.data$;
+
+
+
     this.fields = this.service.fields;
+
+    this.selectionMode = this.usecheckbox ? 'multiple' : 'single';
   }
 
   onPageChange(event: any) {
