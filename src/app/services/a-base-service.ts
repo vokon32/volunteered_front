@@ -27,7 +27,6 @@ export abstract class ABaseTableService {
     messageService!: MessageService;
     confirmationService!: ConfirmationService;
 
-    apiUrl: string = enviroment.apiUrl;
 
     constructor(fields: Field[], service: ABaseTableHttpService) {
         this.service = service;
@@ -104,8 +103,10 @@ export abstract class ABaseTableService {
     delete(name: string, ids: any[]) {
         let ref = this.confirmationService.confirm({
             message: `Ви впевнені, що хочете видалити ${name}`,
-            header: 'Confirmation',
+            header: 'Підтвердження',
             icon: 'pi pi-info-circle',
+            acceptLabel: "Так",
+            rejectLabel: "Ні",
             acceptIcon: "none",
             rejectIcon: "none",
             rejectButtonStyleClass: "p-button-text",
@@ -125,7 +126,7 @@ export abstract class ABaseTableService {
                     });
             },
             reject: () => {
-                this.messageService.add({ severity: 'error', summary: 'Помилка', detail: 'Виникла помилка', life: 3000 });
+                
             },
             key: 'positionDialog'
         });

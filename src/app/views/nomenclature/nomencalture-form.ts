@@ -4,7 +4,7 @@ export function getCreateProfileForm() {
 
     return new FormGroup({
         shortName: new FormControl('тестова назва', Validators.required),
-        amount: new FormControl('0', Validators.required),
+        number: new FormControl('0', Validators.required),
         measure: new FormControl('measure', Validators.required),
         currency: new FormControl('currency', Validators.required)
     });
@@ -16,7 +16,7 @@ export function getEditProfileForm() {
     return new FormGroup({
         id: new FormControl(),
         shortName: new FormControl('тестова назва'),
-        amount: new FormControl('0'),
+        number: new FormControl('0'),
         measure: new FormControl('measure', Validators.required),
         currency: new FormControl('currency', Validators.required)
     });

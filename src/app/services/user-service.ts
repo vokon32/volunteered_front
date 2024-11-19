@@ -6,7 +6,7 @@ import { UserHttpService } from "../http-services/user-http.service";
 @Injectable()
 export class UserService extends ABaseTableService{
 
-    constructor(httpService: UserHttpService) {
+    constructor(protected httpService: UserHttpService) {
         super([
             { name: 'Пошта', value: 'email'},
             { name: 'ПІБ', value: 'name', canSort: true },
@@ -14,5 +14,9 @@ export class UserService extends ABaseTableService{
             { name: 'Номер', value: 'cardNumber' },
             { name: 'Реферальне посилання', value: 'referralLink' },
         ],httpService);
+    }
+
+    bindUsersToAppointment(appointmentId: string, users: any[]){
+        return this.httpService.bindUsersToAppointment(appointmentId, users);
     }
 }

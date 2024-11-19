@@ -32,11 +32,11 @@
                 <div
                     class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
                     
-                    <app-table [service]="userService" (selectedData)="selectUser($event)"></app-table>
+                    <app-table [service]="userService" [usecheckbox]="true" (selectedData)="selectUser($event)"></app-table>
                 </div>
             </div>
             <div class="flex pt-4 justify-content-end">
-                <p-button label="Створити" icon="pi pi-arrow-right" iconPos="right" (onClick)="update()" />
+                <p-button label="Створити" icon="pi pi-arrow-right" iconPos="right" (onClick)="bindUserToAppointment()" />
             </div>
         </ng-template>
     </p-stepperPanel>

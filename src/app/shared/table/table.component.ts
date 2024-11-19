@@ -1,14 +1,14 @@
-import { Component, EventEmitter, input, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ABaseTableService } from '../../services/a-base-service';
 import { BehaviorSubject, first } from 'rxjs';
 import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [TableModule, AsyncPipe, JsonPipe, PaginatorModule, CommonModule],
+  imports: [TableModule, AsyncPipe, PaginatorModule, CommonModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
@@ -25,8 +25,10 @@ export class TableComponent {
   @Input() public toolbarTemplate!: TemplateRef<any>;
   @Input() datakey: string = 'id';
   @Input() usecheckbox = false;
-  selectionMode!: "single" | "multiple";
+  @Input() selectionMode: "single" | "multiple" = 'single';
   @Output() selectedData: EventEmitter<any> = new EventEmitter<any>();
+  @ViewChild('table') table!: Table;
+  
 
   constructor() { }
 
@@ -37,8 +39,6 @@ export class TableComponent {
     this.page$ = this.service.page$;
     this.pageItems$ = this.service.pageItems$;
     this.data$ = this.service.data$;
-
-
 
     this.fields = this.service.fields;
 
@@ -54,7 +54,7 @@ export class TableComponent {
   }
 
   onRowSelect(event: any) {
-    this.selectedData.emit(event.data);
+    this.selectedData.emit(this.table.selection);
   }
 
   OnSort(event: any) {

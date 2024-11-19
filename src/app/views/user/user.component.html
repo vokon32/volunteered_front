@@ -1,5 +1,5 @@
 <div>Користувачі</div>
-<app-table [service]="service" [toolbarTemplate]="toolbar">
+<app-table [service]="service" (selectedData)="selectData($event)" [toolbarTemplate]="toolbar">
 
 
 
@@ -7,7 +7,7 @@
 
 <ng-template #toolbar>
     <app-filter [service]="service" [fields]="['name']"></app-filter>
-    <div class="flex">
+    <div class="toolbar">
         <div>
             <button (click)="create()">Створити</button>
         </div>

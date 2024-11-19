@@ -1,7 +1,96 @@
-.flex {
+form {
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  
+    label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+  
+    input {
+      padding: 10px 12px;
+      font-size: 14px;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+    }
+  
+    .p-dropdown {
+      width: 100%;
+      .p-dropdown-label {
+        font-size: 14px;
+        color: #333;
+      }
+    }
+  }
+  
+  .flex {
     display: flex;
     flex-direction: row;
     gap: 10px;
     justify-content: flex-end;
-    
-}
+    margin-top: 1.5rem;
+  
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &.cancel {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border: 1px solid #6c757d;
+  
+        &:hover {
+          background-color: #e2e6ea;
+        }
+      }
+  
+      &.submit {
+        background-color: #007bff;
+        color: white;
+        border: none;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+  
+  /* Custom styles for the dropdown */
+  .dropdownStyle {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  
+    &:hover {
+      border-color: #007bff;
+    }
+  }
+  
+  .dropdownPanel {
+    border-radius: 4px;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

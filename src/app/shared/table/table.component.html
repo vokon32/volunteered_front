@@ -1,11 +1,11 @@
 <div class="flex">
     <ng-container [ngTemplateOutlet]="toolbarTemplate"></ng-container>
 </div>
-<p-table class="custom-table" [value]="service.data$ | async" [paginator]="true" [tableStyle]="{ 'min-width': '50rem' }"
+<p-table #table class="custom-table" [value]="service.data$ | async" [paginator]="true" [tableStyle]="{ 'min-width': '50rem' }"
     [first]="((service.page$ | async) - 1) * (service.pageItems$ | async)" [rows]="service.pageItems$ | async"
     [totalRecords]="service.count$ | async" currentPageReportTemplate="{first} до {last} з {totalRecords} рядків"
     [showCurrentPageReport]="true" [lazy]="true" [dataKey]="datakey" (onPage)="onPageChange($event)" [scrollable]="true"
-    scrollHeight="400px" (onRowSelect)="onRowSelect($event)" [selectionMode]="selectionMode!" (onSort)="OnSort($event)"
+    scrollHeight="400px" (onRowSelect)="onRowSelect($event)" [selectionMode]="usecheckbox ? null : 'single'" (onSort)="OnSort($event)"
     emptyMessage="Дані не додано" [rowsPerPageOptions]="[5, 10, 25]">
 
     <ng-template pTemplate="header">

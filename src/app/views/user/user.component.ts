@@ -34,10 +34,10 @@ export class UserComponent {
     this.service.create(UserCreateComponent, 'користувача')
   }
   update() {
-    this.service.update(UserEditComponent, this.selectedData.shortName, this.selectedData);
+    this.service.update(UserEditComponent, this.selectedData.email, this.selectedData);
   }
 
   delete() {
-    this.service.delete(this.selectedData.shortName, [this.selectedData.id]);
+    this.service.delete(this.selectedData.email, [this.selectedData.id]);
   }
 }

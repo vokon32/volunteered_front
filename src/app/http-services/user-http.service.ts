@@ -9,4 +9,8 @@ export class UserHttpService extends ABaseTableHttpService {
         super('User');
         
     }
+
+    bindUsersToAppointment(appointmentId: string, users: any[]){
+      return this.httpClient.post(`${this.apiUrl}/${this.controllerName}/bindUsersToAppointment?appointmentId=${appointmentId}`, users);
+    }
 }

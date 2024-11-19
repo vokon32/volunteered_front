@@ -8,7 +8,6 @@ import { TableComponent } from '../../../shared/table/table.component';
 import { NomenclatureComponent } from '../../nomenclature/nomenclature.component';
 import { UserService } from '../../../services/user-service';
 import { AModalBaseService } from '../../../services/a-modal-base.service';
-import { UserComponent } from '../../user/user.component';
 import { FundService } from '../../../services/fund-service';
 import { DropdownModule } from 'primeng/dropdown';
 import { AsyncPipe } from '@angular/common';
@@ -16,13 +15,13 @@ import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'app-appointment-create',
   standalone: true,
-  imports: [ReactiveFormsModule, TableComponent, AsyncPipe, StepperModule, ButtonModule, CalendarModule, DropdownModule, UserComponent],
+  imports: [ReactiveFormsModule, TableComponent, AsyncPipe, StepperModule, ButtonModule, CalendarModule, DropdownModule],
   providers: [UserService, FundService],
   templateUrl: './appointment-create.component.html',
   styleUrl: './appointment-create.component.scss'
 })
 export class AppointmentCreateComponent extends AModalBaseService {
-  selectedUser: any;
+  users!: any[];
   id!: string;
   @ViewChild('stepper') stepper!: Stepper;
   productToAdd!: any;
@@ -62,11 +61,21 @@ export class AppointmentCreateComponent extends AModalBaseService {
     })
   }
 
-  selectUser(user: any) {
-    this.selectedUser = user;
-    this.profileForm.patchValue({
-      users: [user]
-    })
+  selectUser(users: any) {
+    this.users = users;
+  }
 
+  bindUserToAppointment() {
+    this.userService.bindUsersToAppointment(this.id, this.users).subscribe({
+      next: (res: any) => {
+        this.close()
+        this.messageService.add({
+          severity: 'success', summary: 'Успіх', detail: `Об\'єкт успішно створено`
+        })
+      },
+      error: (err: any) => {
+        this.messageService.add({ severity: 'error', summary: 'Помилка', detail: `${err.error.error}` })
+      }
+    });
   }
 }

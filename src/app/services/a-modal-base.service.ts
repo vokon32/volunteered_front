@@ -15,7 +15,6 @@ export abstract class AModalBaseService {
     profileForm!: FormGroup;
 
     messageService!: MessageService;
-    apiUrl: string = enviroment.apiUrl;
 
     constructor() {
         this.dialogService = inject(DialogService);

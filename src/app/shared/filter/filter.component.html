@@ -1,5 +1,6 @@
 @for (field of fields; track field) {
     <input type="text"
+    style="height: 2.3rem;"
     [name]="field"
     (input)="changeFilter($event, field)"
     >
