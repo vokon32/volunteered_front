@@ -32,7 +32,7 @@ export class AppointmentComponent {
 
   create() {
     this.service.getNextNumber().subscribe((res: any) => {
-
+      this.service.createProfileForm.reset();
       this.service.createProfileForm.patchValue({
         number: res.data
       })

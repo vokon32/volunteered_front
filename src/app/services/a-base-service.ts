@@ -69,6 +69,8 @@ export abstract class ABaseTableService {
         })
 
         ref.onClose.pipe(take(1)).pipe(switchMap((res: any) => {
+            this.createProfileForm.reset();
+            this.createProfileForm.enable();
             return this.service.loadData(this.page$.getValue(), this.pageItems$.getValue(), this.filter$.getValue());
 
         })).subscribe((res: any) => {

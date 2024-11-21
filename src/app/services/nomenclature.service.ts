@@ -9,7 +9,7 @@ export class NomenclatureService extends ABaseTableService{
         super([
             { name: 'Назва', value: 'shortName', canSort: true },
             { name: 'Одиниця виміру', value: 'measure' },
-            { name: 'Кількість', value: 'number' },
+            { name: 'Кількість', value: 'amount', canEdit: true },
         ],httpService);
     }
 }
