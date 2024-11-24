@@ -1,4 +1,4 @@
-<p-stepper #stepper>
+<p-stepper [linear]="true" #stepper>
     <p-stepperPanel header="Оберіть дату прибуткової акту">
         <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
             <div class="flex flex-column h-12rem">
@@ -16,7 +16,7 @@
 
             </div>
             <div class="flex pt-4 justify-content-end">
-                <p-button label="Далі" icon="pi pi-arrow-right" iconPos="right" (onClick)="createAct($event)" />
+                <p-button label="Далі" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" (onClick)="createAct($event)" />
             </div>
         </ng-template>
     </p-stepperPanel>
@@ -26,12 +26,14 @@
             <div class="flex flex-column h-12rem">
                 <div
                     class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                    
-                    <app-nomenclature></app-nomenclature>
+
+                    <app-table [service]="nomenclatureService" [usecheckbox]="true"
+                        (selectedData)="selectProduct($event)"></app-table>
                 </div>
             </div>
             <div class="flex pt-4 justify-content-end">
-                <p-button label="Створити" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
+                <p-button label="Додати" icon="pi pi-arrow-right" iconPos="right"  (onClick)="bindProducts()"
+                    />
             </div>
         </ng-template>
     </p-stepperPanel>

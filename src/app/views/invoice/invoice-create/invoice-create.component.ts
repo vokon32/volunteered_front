@@ -1,18 +1,19 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AModalBaseService } from '../../../services/a-modal-base.service';
-import { TableComponent } from "../../../shared/table/table.component";
-import { NomenclatureService } from '../../../services/nomenclature.service';
-import { Stepper, StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { Stepper, StepperModule } from 'primeng/stepper';
+import { AModalBaseService } from '../../../services/a-modal-base.service';
+import { InvoiceService } from '../../../services/invoice-service';
+import { NomenclatureService } from '../../../services/nomenclature.service';
+import { TableComponent } from "../../../shared/table/table.component";
 import { NomenclatureComponent } from '../../nomenclature/nomenclature.component';
 
 
 @Component({
   selector: 'app-invoice-create',
   standalone: true,
-  imports: [ReactiveFormsModule, TableComponent, StepperModule, ButtonModule, CalendarModule, NomenclatureComponent],
+  imports: [ReactiveFormsModule, TableComponent, StepperModule, ButtonModule, CalendarModule],
   providers: [NomenclatureService],
   templateUrl: './invoice-create.component.html',
   styleUrl: './invoice-create.component.scss'
@@ -21,32 +22,22 @@ export class InvoiceCreateComponent extends AModalBaseService {
 
   selectedProduct: any;
   id!: string;
-  @ViewChild('stepper') stepper!: Stepper;
-  productToAdd!: any;
-  productsToCreate: any[] =[];
+  productToAdd: any[] = [];
+  @ViewChild('stepper') stepper! : Stepper;
 
-
-  constructor(public nomenclatureService: NomenclatureService, private cdr: ChangeDetectorRef) {
+  constructor(public nomenclatureService: NomenclatureService) {
     super();
 
-  }
-
-  ngOnInit() {
   }
 
   createInvoice(event: any) {
     this.service.create$([this.profileForm.getRawValue()]).subscribe({
       next: (res: any) => {
         this.id = res.data[0].id;
-
-        this.nomenclatureService.filter$.next(this.id);
         this.nomenclatureService.loadByFilter();
-
-        this.stepper.nextCallback(event, 1);
-        this.cdr.detectChanges();
       },
       error: (err: any) => {
-        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Помилка', detail: `${err.error.error}` })
       }
     });
   }
@@ -55,6 +46,20 @@ export class InvoiceCreateComponent extends AModalBaseService {
     this.dialogService.open(NomenclatureComponent, {
       width: '50vw'
     })
+  }
+
+  bindProducts(){
+    (this.service as InvoiceService).bindProductsToInvoice(this.id, this.productToAdd).subscribe({
+      next: (res: any) => {
+        this.close()
+        this.messageService.add({
+          severity: 'success', summary: 'Успіх', detail: `Об\'єкт успішно створено`
+        })
+      },
+      error: (err: any) => {
+        this.messageService.add({ severity: 'error', summary: 'Помилка', detail: `${err.error.error}` })
+      }
+    });
   }
 
   selectProduct(product : any){

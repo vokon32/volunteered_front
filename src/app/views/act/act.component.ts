@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ActService } from '../../services/act-service';
 import { FilterComponent } from '../../shared/filter/filter.component';
 import { TableComponent } from '../../shared/table/table.component';
-import { ActService } from '../../services/act-service';
-import { DialogService } from 'primeng/dynamicdialog';
-import { getCreateProfileForm, getEditProfileForm } from './act-form';
 import { ActCreateComponent } from './act-create/act-create.component';
 import { ActEditComponent } from './act-edit/act-edit.component';
+import { getCreateProfileForm, getEditProfileForm } from './act-form';
 
 @Component({
   selector: 'app-act',
@@ -31,7 +31,15 @@ export class ActComponent {
   }
 
   create() {
-    this.service.create(ActCreateComponent, 'номенклатуру');
+    this.service.nextNumber().subscribe((res: any) => {
+      this.service.createProfileForm.reset();
+      this.service.createProfileForm.patchValue({
+        number: res.data,
+        nomenclatures: []
+      })
+      this.service.create(ActCreateComponent, 'номенклатуру');
+
+    })
   }
 
   update() {

@@ -1,6 +1,6 @@
 <div>Акти списання</div>
 <app-filter [service]="service" [fields]="['name']"></app-filter>
-<app-table [service]="service" [toolbarTemplate]="toolbar">
+<app-table [service]="service" (selectedData)="selectData($event)"  [toolbarTemplate]="toolbar">
 
 
 

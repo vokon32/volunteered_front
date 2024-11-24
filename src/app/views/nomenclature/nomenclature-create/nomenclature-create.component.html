@@ -2,12 +2,13 @@
     <div class="form-group">
         <label>Назва</label>
         <input type="text" formControlName="shortName" class="form-control" />
-        <label>Кількість</label>
-        <input type="number" formControlName="amount" class="form-control" />
         <label>Одиниця виміру</label>
-        <input type="text" formControlName="measure" class="form-control" />
-        <label>Валюта</label>
-        <input type="text" formControlName="currency" class="form-control" />
+        <p-dropdown 
+        [options]="measures" 
+        formControlName="measure"
+        optionLabel="name" 
+        optionValue="value"
+        placeholder="Select a City" />    
     </div>
     <div class="flex">
         <div>

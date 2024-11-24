@@ -31,7 +31,13 @@ export class InvoiceComponent {
   }
 
   create() {
-    this.service.create(InvoiceCreateComponent, 'номенклатуру');
+    this.service.nextNumber().subscribe((res: any) => {
+      this.service.createProfileForm.reset();
+      this.service.createProfileForm.patchValue({
+        number: res.data
+      })
+      this.service.create(InvoiceCreateComponent, 'номенклатуру');
+    })
   }
 
   update() {

@@ -9,4 +9,12 @@ export class ActHttpService extends ABaseTableHttpService {
         super('Act');
         
     }
+
+    bindProductsToAct(actId: string, nomenclatures: any[]) {
+      return this.httpClient.post(`${this.apiUrl}/${this.controllerName}/bindProductsToAct?actId=${actId}`, nomenclatures);
+    }
+
+    nextNumber(){
+      return this.httpClient.get(`${this.apiUrl}/${this.controllerName}/nextNumber`);
+    }
 }

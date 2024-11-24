@@ -19,7 +19,7 @@
             @for (field of fields; track field) {
 
             @if (field.canSort) {
-            <th pEditableColumn>{{field.name}} <p-sortIcon field="code"></p-sortIcon></th>
+            <th [pSortableColumn]="field.value" pEditableColumn>{{field.name}} <p-sortIcon field="code"></p-sortIcon></th>
 
             }
             @else {
@@ -29,7 +29,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
-        <tr [pSelectableRow]="data" [pEditableRow]="data">
+        <tr  [pSelectableRow]="data" [pEditableRow]="data">
             <!-- {{data | json}} -->
             @if (usecheckbox) {
             <td>

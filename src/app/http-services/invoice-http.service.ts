@@ -9,4 +9,11 @@ export class InvoiceHttpService extends ABaseTableHttpService {
         super('Invoice');
         
     }
+
+    bindProductsToInvoice(invoiceId: string, nomenclatures: any[]) {
+      return this.httpClient.post(`${this.apiUrl}/${this.controllerName}/bindProductsToInvoice?invoiceId=${invoiceId}`, nomenclatures);
+    }
+    nextNumber(){
+      return this.httpClient.get(`${this.apiUrl}/${this.controllerName}/nextNumber`);
+    }
 }

@@ -7,6 +7,7 @@ import { NomenclatureService } from '../../../services/nomenclature.service';
 import { TableComponent } from '../../../shared/table/table.component';
 import { NomenclatureComponent } from '../../nomenclature/nomenclature.component';
 import { AModalBaseService } from '../../../services/a-modal-base.service';
+import { ActService } from '../../../services/act-service';
 
 @Component({
   selector: 'app-act-create',
@@ -20,12 +21,9 @@ export class ActCreateComponent extends AModalBaseService {
 
   selectedProduct: any;
   id!: string;
-  @ViewChild('stepper') stepper!: Stepper;
-  productToAdd!: any;
-  productsToCreate: any[] = [];
+  productToAdd: any[] = [];
 
-
-  constructor(public nomenclatureService: NomenclatureService, private cdr: ChangeDetectorRef) {
+  constructor(public nomenclatureService: NomenclatureService) {
     super();
 
   }
@@ -34,16 +32,29 @@ export class ActCreateComponent extends AModalBaseService {
     this.service.create$([this.profileForm.getRawValue()]).subscribe({
       next: (res: any) => {
         this.id = res.data[0].id;
-
-        this.nomenclatureService.filter$.next(this.id);
         this.nomenclatureService.loadByFilter();
-
-        this.stepper.nextCallback(event, 1);
-        this.cdr.detectChanges();
       },
       error: (err: any) => {
-        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Помилка', detail: `${err.error.error}` })
       }
     });
+  }
+
+  bindProducts(){
+    (this.service as ActService).bindProductsToAct(this.id, this.productToAdd).subscribe({
+      next: (res: any) => {
+        this.close()
+        this.messageService.add({
+          severity: 'success', summary: 'Успіх', detail: `Об\'єкт успішно створено`
+        })
+      },
+      error: (err: any) => {
+        this.messageService.add({ severity: 'error', summary: 'Помилка', detail: `${err.error.error}` })
+      }
+    });
+  }
+
+  selectProduct(product : any){
+    this.productToAdd = product;
   }
 }
