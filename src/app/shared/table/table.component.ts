@@ -23,6 +23,7 @@ export class TableComponent {
 
   @Input() service!: ABaseTableService;
   @Input() public toolbarTemplate!: TemplateRef<any>;
+  @Input() public btnsTemplate!: TemplateRef<any>;
   @Input() datakey: string = 'id';
   @Input() usecheckbox = false;
   @Input() selectionMode: "single" | "multiple" = 'single';

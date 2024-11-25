@@ -17,4 +17,12 @@ export class AppointmentHttpService extends ABaseTableHttpService {
   bindNomenclaturesToAppointment(appointmentId: string, nomenclatures: any[]) {
     return this.httpClient.post(`${this.apiUrl}/${this.controllerName}/bindNomenclaturesToAppointment?appointmentId=${appointmentId}`, nomenclatures);
   }
+
+  endAppointment(appointmentId: string) {
+    return this.httpClient.post(`${this.apiUrl}/${this.controllerName}/endAppointment?appointmentId=${appointmentId}`, {});
+  }
+
+  getResults(appointmentId: string) {
+    return this.httpClient.get(`${this.apiUrl}/${this.controllerName}/getResults?appointmentId=${appointmentId}`);
+  }
 }

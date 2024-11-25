@@ -6,8 +6,8 @@
     [rows]="service.pageItems$ | async" [totalRecords]="service.count$ | async"
     currentPageReportTemplate="{first} до {last} з {totalRecords} рядків" [showCurrentPageReport]="true" [lazy]="true"
     [dataKey]="datakey" (onPage)="onPageChange($event)" [scrollable]="true" scrollHeight="400px"
-    (onRowSelect)="onRowSelect($event)" [selectionMode]="usecheckbox ? null : 'single'" editMode="cell" (onSort)="OnSort($event)"
-    emptyMessage="Дані не додано" [rowsPerPageOptions]="[5, 10, 25]">
+    (onRowSelect)="onRowSelect($event)" [selectionMode]="usecheckbox ? null : 'single'" editMode="cell"
+    (onSort)="OnSort($event)" emptyMessage="Дані не додано" [rowsPerPageOptions]="[5, 10, 25]">
 
     <ng-template pTemplate="header">
 
@@ -19,17 +19,22 @@
             @for (field of fields; track field) {
 
             @if (field.canSort) {
-            <th [pSortableColumn]="field.value" pEditableColumn>{{field.name}} <p-sortIcon field="code"></p-sortIcon></th>
+            <th [pSortableColumn]="field.value" pEditableColumn>{{field.name}} <p-sortIcon field="code"></p-sortIcon>
+            </th>
 
             }
             @else {
             <th> {{field.name}}</th>
             }
             }
+
+            @if (btnsTemplate) {
+            <th></th>
+            }
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
-        <tr  [pSelectableRow]="data" [pEditableRow]="data">
+        <tr [pSelectableRow]="data" [pEditableRow]="data">
             <!-- {{data | json}} -->
             @if (usecheckbox) {
             <td>
@@ -56,7 +61,16 @@
             <td>{{data[field.value]}}</td>
 
             }
+            @if (btnsTemplate) {
             }
+            }
+            <td>
+                <div class="flex">
+                    <ng-container *ngTemplateOutlet="btnsTemplate; context: { data: data }">></ng-container>
+                </div>
+            </td>
+
+
 
         </tr>
     </ng-template>

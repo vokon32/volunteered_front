@@ -1,0 +1,26 @@
+<form [formGroup]="profileForm">
+    <div class="form-group">
+        <label>Дата:</label>
+        {{this.profileForm.get('date')?.value | date}}
+    </div>
+</form>
+<div class="mt-5">
+    <app-table [service]="service" [btnsTemplate]="btns"></app-table>
+</div>
+
+@if (!isFinished) {
+<div>
+    <button class="btn-success" (click)="endAppointment()">Завершити прийом</button>
+</div>
+} @else {
+<div>
+    <button class="btn-success" (click)="getResults()">Переглянути результати</button>
+</div>
+}
+
+
+<ng-template #btns let-data="data">
+    @if (!isFinished) {
+    <button class="btn-success" (click)="markUser(data)">Відмітити</button>
+    }
+</ng-template>

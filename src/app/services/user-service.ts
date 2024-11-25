@@ -19,6 +19,8 @@ export class UserService extends ABaseTableService {
     bindUsersToAppointment(appointmentId: string, users: any[]) {
         return this.httpService.bindUsersToAppointment(appointmentId, users);
     }
-
+    markUser(appointmentId: string, user: any) {
+        return this.httpService.markUser(appointmentId, user);
+    }
 
 }

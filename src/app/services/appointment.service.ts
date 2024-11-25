@@ -7,9 +7,9 @@ export class AppointmentService extends ABaseTableService {
 
     constructor(private httpService: AppointmentHttpService) {
         super([
-            { name: 'Дата', value: 'date', canSort: true },
-            { name: 'Фонд', value: 'fundName' },
             { name: 'Номер', value: 'number' },
+            { name: 'Фонд', value: 'fundName' },
+            { name: 'Дата', value: 'date', canSort: true },
         ], httpService);
     }
 
@@ -19,5 +19,12 @@ export class AppointmentService extends ABaseTableService {
     }
     bindNomenclaturesToAppointment(appointmentId: string, nomenclatures: any[]) {
         return this.httpService.bindNomenclaturesToAppointment(appointmentId, nomenclatures);
+    }
+
+    endAppointment(appointmentId: string){
+        return this.httpService.endAppointment(appointmentId);
+    }
+    getResults(appointmentId: string){
+        return this.httpService.getResults(appointmentId);
     }
 }

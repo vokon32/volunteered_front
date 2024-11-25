@@ -23,3 +23,16 @@ export function getEditProfileForm() {
     });
 
 }
+
+export function getHoldProfileForm() {
+
+    return new FormGroup({
+        id: new FormControl(),
+        date: new FormControl(null, Validators.required),
+        number: new FormControl(null, Validators.required),
+        fundId: new FormControl(null, Validators.required),
+        users: new FormControl([]),
+        isFinished: new FormControl(false)
+    });
+
+}
